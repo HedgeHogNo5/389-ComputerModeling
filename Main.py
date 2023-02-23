@@ -85,4 +85,4 @@ while running:
             running = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
-
+                newtons_cradle.reset()
