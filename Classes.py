@@ -10,23 +10,55 @@ BALL_COLOR = (255, 255, 255)
 BACKGROUND_COLOR = (0, 0, 0)
 CHAIN_COLOR = (150, 150, 150)
 CHAIN_LENGTH = 150
-GRAVITY = 9.81
 BALL_MASS = 1
 
 
-class Ball:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.velocity = 0
-        self.mass = BALL_MASS
+class Particle:
+    """In this script we are creating a single class called Particle.
+    This Particle will be the basis for the masses of the Newton's Cradel
 
-    def draw(self, surface):
-        pygame.draw.circle(surface, BALL_COLOR, (int(self.x), int(self.y)), BALL_RADIUS)
 
-    def move(self, time_step):
-        self.y += self.velocity * time_step
-        self.velocity += GRAVITY * time_step
+    This class needs to have clear variables:
+    Position (representing the position as a vector);
+    Velocity (representing the velocity as a vector);
+    and acceleration (representing the acceleration as a vector)
+    as well as mass which is a scalar quantity
+    """
+
+    def __init__(
+            self,
+            position=np.array([0.0, 0.0, 0.0], dtype=float),
+            velocity=np.array([0.0, 0.0, 0.0], dtype=float),
+            acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
+            name='Ball',  # name of the object, duhh
+            mass=1.0,  # Currently in Kilograms (Kg)
+            G=6.67408e-11
+    ):
+        self.position = np.array(position, dtype=float)
+        self.velocity = np.array(velocity, dtype=float)
+        self.acceleration = np.array(acceleration, dtype=float)
+        self.name = name
+        self.mass = mass
+        self.G = G
+
+    """Defining the names and other variables of the Particle"""
+
+    def __str__(self):
+        return "Particle: {0}, Mass: {1:.3e}, Position: {2}, Velocity: {3}, Acceleration: {4}".format(
+            self.name, self.mass, self.position, self.velocity, self.acceleration
+        )
+
+    """This updates the position of any body passed through this class using using the Euler-Cromer Numerical method"""
+
+    def Euler(self, deltaT):
+        self.position = self.position + self.velocity * deltaT
+        self.velocity = self.velocity + self.acceleration * deltaT
+
+    """This updates the position of any body passed through this class using using the Euler-Cromer Numerical method"""
+
+    def EulerCromer(self, deltaT):
+        self.velocity = self.velocity + self.acceleration * deltaT
+        self.position = self.position + self.velocity * deltaT
 
 
 class NewtonsCradle:
