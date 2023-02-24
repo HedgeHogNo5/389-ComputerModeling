@@ -1,18 +1,4 @@
-import pygame
-import math
 import numpy as np
-
-# Define Constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-BALL_RADIUS = 25
-NUM_BALLS = 5
-BALL_COLOR = (255, 255, 255)
-BACKGROUND_COLOR = (0, 0, 0)
-CHAIN_COLOR = (150, 150, 150)
-CHAIN_LENGTH = 150
-BALL_MASS = 1
-
 
 class Particle:
     """In this script we are creating a single class called Particle.
@@ -33,16 +19,15 @@ class Particle:
             acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
             name='Ball',  # name of the object, duhh
             mass=1.0,  # Currently in Kilograms (Kg)
-            G=6.67408e-11
+            g = 9.81
     ):
         self.position = np.array(position, dtype=float)
         self.velocity = np.array(velocity, dtype=float)
         self.acceleration = np.array(acceleration, dtype=float)
         self.name = name
         self.mass = mass
-        self.G = G
-
-    """Defining the names and other variables of the Particle"""
+        self.g = g
+        #Defining the names and other variables of the Particle
 
     def __str__(self):
         return "Particle: {0}, Mass: {1:.3e}, Position: {2}, Velocity: {3}, Acceleration: {4}".format(
@@ -54,12 +39,13 @@ class Particle:
     def Euler(self, deltaT):
         self.position = self.position + self.velocity * deltaT
         self.velocity = self.velocity + self.acceleration * deltaT
-
-    """This updates the position of any body passed through this class using using the Euler-Cromer Numerical method"""
+        #This updates the position of any body passed through this class using using the Euler Numerical method
 
     def EulerCromer(self, deltaT):
         self.velocity = self.velocity + self.acceleration * deltaT
         self.position = self.position + self.velocity * deltaT
+        # This updates the position of any body passed through this class using using the Euler-Cromer Numerical method
+
 
 
 class NewtonsCradle:
