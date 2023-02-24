@@ -34,8 +34,6 @@ class Particle:
             self.name, self.mass, self.position, self.velocity, self.acceleration
         )
 
-    """This updates the position of any body passed through this class using using the Euler-Cromer Numerical method"""
-
     def Euler(self, deltaT):
         self.position = self.position + self.velocity * deltaT
         self.velocity = self.velocity + self.acceleration * deltaT
