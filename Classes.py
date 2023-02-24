@@ -74,10 +74,29 @@ class NewtonsCradle:
             acceleration = tension + gravity
             particle.acceleration = acceleration
 
-    def reset(self):
-        for ball in self.balls:
-            ball.y = self.y + CHAIN_LENGTH
-            ball.velocity = 0
+        # update position and velocity of each particle
+        self.collision_detect(deltaT)
+
+    def collision_detect(self, deltaT):
+        for i in range(self.NUM_BALLS-1):
+            # check if balls are touching
+            dist = np.linalg.norm(self.particles_list[i + 1].position - self.particles_list[i].position)
+            if dist < self.SPACING:
+                # calculate new velocities
+                v1 = self.particles_list[i].velocity
+                v2 = self.particles_list[i + 1].velocity
+                m1 = self.particles_list[i].mass
+                m2 = self.particles_list[i + 1].mass
+                u1 = ((m1 - m2) / (m1 + m2)) * v1 + ((2 * m2) / (m1 + m2)) * v2
+                u2 = ((m2 - m1) / (m1 + m2)) * v2 + ((2 * m1) / (m1 + m2)) * v1
+                self.particles_list[i].velocity = u1
+                self.particles_list[i + 1].velocity = u2
+
+        for particle in self.particles_list:
+            # update particle position and velocity
+            particle.EulerCromer(deltaT)
+
+
 
 
 
