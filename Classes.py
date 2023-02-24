@@ -11,6 +11,7 @@ BACKGROUND_COLOR = (0, 0, 0)
 CHAIN_COLOR = (150, 150, 150)
 CHAIN_LENGTH = 150
 GRAVITY = 9.81
+BALL_MASS = 1
 
 
 class Ball:
@@ -18,6 +19,7 @@ class Ball:
         self.x = x
         self.y = y
         self.velocity = 0
+        self.mass = BALL_MASS
 
     def draw(self, surface):
         pygame.draw.circle(surface, BALL_COLOR, (int(self.x), int(self.y)), BALL_RADIUS)
@@ -65,24 +67,5 @@ class NewtonsCradle:
             ball.velocity = 0
 
 
-# Set up Pygame
-pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Newton's Cradle")
 
-# Create Newton's Cradle
-newtons_cradle = NewtonsCradle(SCREEN_WIDTH / 2 - (NUM_BALLS - 1) * (BALL_RADIUS * 2 + CHAIN_LENGTH) / 2, 50)
 
-# Set up game loop
-running = True
-clock = pygame.time.Clock()
-time_step = 0.01
-
-while running:
-    # Handle events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_r:
-                newtons_cradle.reset()
