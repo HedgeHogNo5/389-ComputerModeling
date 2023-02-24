@@ -1,5 +1,6 @@
 import pygame
 import math
+import numpy as np
 
 # Define Constants
 SCREEN_WIDTH = 800
