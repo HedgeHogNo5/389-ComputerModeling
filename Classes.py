@@ -47,26 +47,32 @@ class Particle:
 
 
 class NewtonsCradle:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.balls = []
-        for i in range(NUM_BALLS):
-            ball_x = x + i * (BALL_RADIUS * 2 + CHAIN_LENGTH)
-            ball_y = y + CHAIN_LENGTH
-            ball = Ball(ball_x, ball_y)
-            self.balls.append(ball)
+    def __init__(self, particles_list):
+        self.particles_list = particles_list
+        self.BALL_RADIUS = 2.5
+        self.NUM_BALLS = len(particles_list)
+        self.CHAIN_LENGTH = 10
+        self.SPACING = 2 * self.BALL_RADIUS
 
+    def pendulum(self, deltaT):
+        # calculate acceleration due to gravity and tension
+        for i in range(self.NUM_BALLS):
+            particle = self.particles_list[i]
+            # calculate tension
+            if i == 0:
+                tension = np.array([0.0, 0.0, 0.0], dtype=float)
+            else:
+                prev_particle = self.particles_list[i - 1]
+                dist = np.linalg.norm(prev_particle.position - particle.position)
+                direction = (prev_particle.position - particle.position) / dist
+                tension = direction * particle.mass * self.g
 
-    def update(self, time_step):
-        for ball in self.balls:
-            ball.move(time_step)
-        for i in range(NUM_BALLS - 1):
-            ball1 = self.balls[i]
-            ball2 = self.balls[i + 1]
-            distance = math.sqrt((ball2.x - ball1.x) ** 2 + (ball2.y - ball1.y) ** 2)
-            if distance < BALL_RADIUS * 2:
-                ball1.velocity, ball2.velocity = ball2.velocity, ball1.velocity
+            # calculate gravity
+            gravity = np.array([0.0, -particle.mass * self.g, 0.0], dtype=float)
+
+            # calculate acceleration
+            acceleration = tension + gravity
+            particle.acceleration = acceleration
 
     def reset(self):
         for ball in self.balls:
