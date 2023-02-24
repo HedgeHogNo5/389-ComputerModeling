@@ -73,16 +73,6 @@ class NewtonsCradle:
             ball = Ball(ball_x, ball_y)
             self.balls.append(ball)
 
-    def draw(self, surface):
-        for ball in self.balls:
-            ball.draw(surface)
-        pygame.draw.line(surface, CHAIN_COLOR, (self.x, self.y), (self.balls[0].x, self.balls[0].y), 2)
-        pygame.draw.line(surface, CHAIN_COLOR, (self.x + (NUM_BALLS - 1) * (BALL_RADIUS * 2 + CHAIN_LENGTH), self.y),
-                         (self.balls[-1].x, self.balls[-1].y), 2)
-        for i in range(NUM_BALLS - 1):
-            start_ball = self.balls[i]
-            end_ball = self.balls[i + 1]
-            pygame.draw.line(surface, CHAIN_COLOR, (start_ball.x, start_ball.y), (end_ball.x, end_ball.y), 2)
 
     def update(self, time_step):
         for ball in self.balls:
