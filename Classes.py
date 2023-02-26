@@ -17,7 +17,7 @@ class Particle:
             position=np.array([0.0, 0.0, 0.0], dtype=float),
             velocity=np.array([0.0, 0.0, 0.0], dtype=float),
             acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
-            name='Ball',  # name of the object, duhh
+            name='Ball',  # name of the object
             mass=1.0,  # Currently in Kilograms (Kg)
             g = 9.81
     ):
