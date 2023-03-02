@@ -53,19 +53,7 @@ class NewtonsCradle:
         self.NUM_BALLS = len(particles_list)
         self.CHAIN_LENGTH = 10
         self.SPACING = 2 * self.BALL_RADIUS
-
-    def pendulum(self, deltaT):
-        # calculate acceleration due to gravity and tension
-        for i in range(self.NUM_BALLS):
-            particle = self.particles_list[i]
-            # calculate tension
-            if i == 0:
-                tension = np.array([0.0, 0.0, 0.0], dtype=float)
-            else:
-                prev_particle = self.particles_list[i - 1]
-                dist = np.linalg.norm(prev_particle.position - particle.position)
-                direction = (prev_particle.position - particle.position) / dist
-                tension = direction * particle.mass * self.g
+        self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
 
             # calculate gravity
             gravity = np.array([0.0, -particle.mass * self.g, 0.0], dtype=float)
