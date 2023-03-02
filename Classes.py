@@ -96,4 +96,10 @@ class Pendulum(NewtonsCradle):
         self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
         super().__init__(self.particles_list)
 
-
+    def update(self, deltaT):
+        self.collision_detect(deltaT)
+        particle = self.particles_list[0]
+        theta = np.arcsin(-particle.position[1] / self.length)
+        alpha = -self.g[1] / self.length * np.sin(theta)
+        particle.acceleration[0] = -alpha * np.sin(theta)
+        particle.acceleration[1]
