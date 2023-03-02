@@ -55,15 +55,6 @@ class NewtonsCradle:
         self.SPACING = 2 * self.BALL_RADIUS
         self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
 
-            # calculate gravity
-            gravity = np.array([0.0, -particle.mass * self.g, 0.0], dtype=float)
-
-            # calculate acceleration
-            acceleration = tension + gravity
-            particle.acceleration = acceleration
-
-        # update position and velocity of each particle
-        self.collision_detect(deltaT)
 
     def collision_detect(self, deltaT):
         for i in range(self.NUM_BALLS-1):
