@@ -76,7 +76,24 @@ class NewtonsCradle:
             particle.EulerCromer(deltaT)
 
 
+class Pendulum(NewtonsCradle):
 
-
+    def __init__(self, length, mass):
+        self.length = length
+        self.mass = mass
+        self.BALL_RADIUS = 2.5
+        self.NUM_BALLS = 1
+        self.particles_list = [Particle(
+            position=np.array([0.0, -self.length, 0.0], dtype=float),
+            velocity=np.array([0.0, 0.0, 0.0], dtype=float),
+            acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
+            name='Ball',
+            mass=self.mass,
+            g=np.array([0, -9.81, 0])
+        )]
+        self.CHAIN_LENGTH = 10
+        self.SPACING = 2 * self.BALL_RADIUS
+        self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
+        super().__init__(self.particles_list)
 
 
