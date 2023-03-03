@@ -79,7 +79,6 @@ class NewtonsCradle:
 class Pendulum(NewtonsCradle):
 
     def __init__(self, length, mass):
-        super().__init__(self.particles_list)
         self.length = length
         self.mass = mass
         self.BALL_RADIUS = 2.5
@@ -96,6 +95,7 @@ class Pendulum(NewtonsCradle):
         self.SPACING = 2 * self.BALL_RADIUS
         self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
 
+        super().__init__(self.particles_list)
     def update(self, deltaT):
         self.collision_detect(deltaT)
         particle = self.particles_list[0]
