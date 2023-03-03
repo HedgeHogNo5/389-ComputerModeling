@@ -30,8 +30,8 @@ class Particle:
         #Defining the names and other variables of the Particle
 
     def __str__(self):
-        return "Particle: {0}, Mass: {1:.3e}, Position: {2}, Velocity: {3}, Acceleration: {4}".format(
-            self.name, self.mass, self.position, self.velocity, self.acceleration
+        return "Particle: {0}, Mass: {1}, Position: {2}, Velocity: {3}, Acceleration: {4}, gravitational Acceleration{5}".format(
+            self.name, self.mass, self.position, self.velocity, self.acceleration, self.g
         )
 
     def Euler(self, deltaT):
@@ -79,6 +79,7 @@ class NewtonsCradle:
 class Pendulum(NewtonsCradle):
 
     def __init__(self, length, mass):
+        super().__init__(self.particles_list)
         self.length = length
         self.mass = mass
         self.BALL_RADIUS = 2.5
@@ -94,7 +95,6 @@ class Pendulum(NewtonsCradle):
         self.CHAIN_LENGTH = 10
         self.SPACING = 2 * self.BALL_RADIUS
         self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
-        super().__init__(self.particles_list)
 
     def update(self, deltaT):
         self.collision_detect(deltaT)
@@ -102,4 +102,4 @@ class Pendulum(NewtonsCradle):
         theta = np.arcsin(-particle.position[1] / self.length)
         alpha = -self.g[1] / self.length * np.sin(theta)
         particle.acceleration[0] = -alpha * np.sin(theta)
-        particle.acceleration[1]
+        print(particle.postition)
