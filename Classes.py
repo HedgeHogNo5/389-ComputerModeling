@@ -102,4 +102,3 @@ class Pendulum(NewtonsCradle):
         theta = np.arcsin(-particle.position[1] / self.length)
         alpha = -self.g[1] / self.length * np.sin(theta)
         particle.acceleration[0] = -alpha * np.sin(theta)
-        print(particle.postition)
