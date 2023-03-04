@@ -58,8 +58,17 @@ class NewtonsCradle:
 
     def collision_detection(self, DeltaT):
         for particle in self.particles_list:
-            # update particle position and velocity
-            particle.EulerCromer(deltaT)
+
+    def movement(self, deltaT):
+
+        for i in range(self.NUM_BALLS):
+            equilibrium = np.array([i * self.SPACING, self.CHAIN_LENGTH, 0])
+
+            for particle in self.particles_list:
+                angle = np.arccos(np.dot(particle.position, equilibrium)/(np.linalg.norm(particle.position) * np.linalg.norm(equilibrium)))
+                particle.acceleration = np.array([np.linalg.norm(particle.g) * np.sin(angle), np.linalg.norm(particle.g) * np.cos(angle), 0])
+                # update particle position and velocity
+                particle.EulerCromer(deltaT)
 
 
 class Pendulum(NewtonsCradle):
