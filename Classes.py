@@ -53,8 +53,6 @@ class NewtonsCradle:
         self.NUM_BALLS = len(particles_list)
         self.CHAIN_LENGTH = 10
         self.SPACING = 2 * self.BALL_RADIUS
-        self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
-
 
     def collision_detection(self, DeltaT):
         for particle in self.particles_list:
