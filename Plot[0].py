@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load data from file
-data = np.loadtxt("pendulum_positions.txt")
+data = np.loadtxt("/Users/samuelhedges/Documents/GitHub/389-ComputerModeling/pendulum_position.txt")
 
 # Plot position vs. time
 plt.plot(data[:, 0], data[:, 1])
