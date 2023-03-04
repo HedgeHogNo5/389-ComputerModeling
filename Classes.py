@@ -56,21 +56,7 @@ class NewtonsCradle:
         self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
 
 
-    def collision_detect(self, deltaT):
-        for i in range(self.NUM_BALLS-1):
-            # check if balls are touching
-            dist = np.linalg.norm(self.particles_list[i + 1].position - self.particles_list[i].position)
-            if dist < self.SPACING:
-                # calculate new velocities
-                v1 = self.particles_list[i].velocity
-                v2 = self.particles_list[i + 1].velocity
-                m1 = self.particles_list[i].mass
-                m2 = self.particles_list[i + 1].mass
-                u1 = ((m1 - m2) / (m1 + m2)) * v1 + ((2 * m2) / (m1 + m2)) * v2
-                u2 = ((m2 - m1) / (m1 + m2)) * v2 + ((2 * m1) / (m1 + m2)) * v1
-                self.particles_list[i].velocity = u1
-                self.particles_list[i + 1].velocity = u2
-
+    def collision_detection(self, DeltaT):
         for particle in self.particles_list:
             # update particle position and velocity
             particle.EulerCromer(deltaT)
