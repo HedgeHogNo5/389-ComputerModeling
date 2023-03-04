@@ -86,7 +86,6 @@ class Pendulum(NewtonsCradle):
             mass=self.mass,
             g=np.array([0, -9.81, 0])
         )]
-        self.CHAIN_LENGTH = 10
         self.SPACING = 2 * self.BALL_RADIUS
         self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
 
