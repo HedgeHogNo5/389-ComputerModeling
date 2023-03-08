@@ -88,7 +88,7 @@ class NewtonsCradle:
 
 class Pendulum(NewtonsCradle):
 
-    def __init__(self, length, mass):
+    def __init__(self, mass, length):
         self.length = length
         self.mass = mass
         self.BALL_RADIUS = 2.5
