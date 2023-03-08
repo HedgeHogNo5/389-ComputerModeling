@@ -57,7 +57,20 @@ class NewtonsCradle:
         self.SPACING = 2 * self.BALL_RADIUS
 
     def collision_detection(self, DeltaT):
-        for particle in self.particles_list:
+
+       for i in self.NUM_BALLS:
+           if np.linalg.norm(self.particles_list[i]-self.particles_list[i+1]) <= self.SPACING:
+               u1=self.particles_list[i].velocity
+               u2=self.particles_list[i+1].velocity
+               m1=self.particles_list[i].mass
+               m2=self.particles_list[i+1].mass
+               mu1 = m1 / 2  # Half mass used in Kinetic energy EQN
+               mu2 = m2 / 2  # Half mass used in Kinetic energy EQN
+               mr = m2 / m1  # Ratio of the two masses
+               a = (mu2 + mu1 * mr ** 2)
+               b = (-2 * mr * mu1 * u1 - 2 * u2 * (mr ** 2) * mu1 * u2 * mr ** 2)
+               c = 2 * mr * u1 * mu1 * u2 + mu1 * (mr ** 2) * (u2 ** 2) - mu2 * u2
+               v1=(-b+np.sqrt((b**2)-4*a*c))/2*a #Quadratic forumla
 
     def movement(self, deltaT):
 
