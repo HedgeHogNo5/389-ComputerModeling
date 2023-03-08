@@ -27,12 +27,13 @@ class Particle:
         self.acceleration = np.array(acceleration, dtype=float)
         self.name = name
         self.mass = mass
+        self.radius = radius
         self.g = g
         #Defining the names and other variables of the Particle
 
     def __str__(self):
-        return "Particle: {0}, Mass: {1}, Position: {2}, Velocity: {3}, Acceleration: {4}, gravitational Acceleration{5}".format(
-            self.name, self.mass, self.position, self.velocity, self.acceleration, self.g
+        return "Particle: {0}, Mass: {1}, Radius{2} Position: {3}, Velocity: {4}, Acceleration: {5}, gravitational Acceleration{6}".format(
+            self.name, self.mass, self.radius,  self.position, self.velocity, self.acceleration, self.g
         )
 
     def Euler(self, deltaT):
