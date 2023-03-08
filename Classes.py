@@ -19,6 +19,7 @@ class Particle:
             acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
             name='Ball',  # name of the object
             mass=1.0,  # Currently in Kilograms (Kg)
+            radius = 1.0, #Currently in cm
             g = np.array([0, -9.81, 0]) #in metres per second^2 using a approximation
     ):
         self.position = np.array(position, dtype=float)
