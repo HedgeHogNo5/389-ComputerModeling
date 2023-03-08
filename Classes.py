@@ -83,8 +83,9 @@ class NewtonsCradle:
                 angle = np.arccos(np.dot(particle.position, equilibrium)/(np.linalg.norm(particle.position) * np.linalg.norm(equilibrium))) #Defines the angle that the particle makes to the equalibrium position
                 particle.acceleration = np.array([(np.linalg.norm(particle.g)/particle.mass) * np.sin(angle), (np.linalg.norm(particle.g)/particle.mass) * np.cos(angle), 0]) #Creates gravitational acceleration due to a particle's displacemet
                 # update particle position and velocity
+                if np.linalg.norm(particle.position)>self.CHAIN_LENGTH:
+                    raise Exception
                 particle.EulerCromer(deltaT)
-
 
 class Pendulum(NewtonsCradle):
 
