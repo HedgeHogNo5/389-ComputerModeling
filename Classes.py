@@ -76,12 +76,12 @@ class NewtonsCradle:
 
     def movement(self, deltaT):
 
-        for i in range(self.NUM_BALLS):
-            equilibrium = np.array([i * self.SPACING, self.CHAIN_LENGTH, 0])
+        for i in range(self.NUM_BALLS): #iterates all the balls in the particles_list
+            equilibrium = np.array([i * self.SPACING, self.CHAIN_LENGTH, 0]) #defines an equalibrium position for all the particles
 
             for particle in self.particles_list:
-                angle = np.arccos(np.dot(particle.position, equilibrium)/(np.linalg.norm(particle.position) * np.linalg.norm(equilibrium)))
-                particle.acceleration = np.array([np.linalg.norm(particle.g) * np.sin(angle), np.linalg.norm(particle.g) * np.cos(angle), 0])
+                angle = np.arccos(np.dot(particle.position, equilibrium)/(np.linalg.norm(particle.position) * np.linalg.norm(equilibrium))) #Defines the angle that the particle makes to the equalibrium position
+                particle.acceleration = np.array([(np.linalg.norm(particle.g)/particle.mass) * np.sin(angle), (np.linalg.norm(particle.g)/particle.mass) * np.cos(angle), 0]) #Creates gravitational acceleration due to a particle's displacemet
                 # update particle position and velocity
                 particle.EulerCromer(deltaT)
 
