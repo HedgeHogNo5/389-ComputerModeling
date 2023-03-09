@@ -74,7 +74,7 @@ class NewtonsCradle:
                    self.particles_list[i+1].velocity[j] = (-b + np.sqrt((b ** 2) - 4 * a * c)) / 2 * a  # Quadratic forumla
                    self.particles_list[i].velocity[j] = u1 + mr * (u2 - self.particles_list[i+1].velocity[j])
 
-    def movement(self, deltaT):
+    def movement(self):
 
         for i in range(self.NUM_BALLS): #iterates all the balls in the particles_list
             equilibrium = np.array([i * self.SPACING, self.CHAIN_LENGTH, 0]) #defines an equalibrium position for all the particles
@@ -85,7 +85,6 @@ class NewtonsCradle:
                 # update particle position and velocity
                 if np.linalg.norm(particle.position)>self.CHAIN_LENGTH:
                     raise Exception
-                particle.EulerCromer(deltaT)
 
 class Pendulum(NewtonsCradle):
 
@@ -108,3 +107,4 @@ class Pendulum(NewtonsCradle):
         super().__init__(self.particles_list)
     def update(self, deltaT):
         self.movement(deltaT)
+
