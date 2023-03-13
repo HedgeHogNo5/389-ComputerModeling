@@ -35,7 +35,13 @@ class Particle:
         return "Particle: {0}, Mass: {1}, Radius{2} Position: {3}, Velocity: {4}, Acceleration: {5}, gravitational Acceleration{6}".format(
             self.name, self.mass, self.radius,  self.position, self.velocity, self.acceleration, self.g
         )
+    def KineticEnergy(self):
+       KE = 1/2*self.mass*np.linalg.norm(self.velocity)
+       return KE
 
+    def Momentum(self):
+       rho = 1/2*self.mass*np.linalg.norm(self.velocity)
+       return rho
     def Euler(self, deltaT):
         self.position = self.position + self.velocity * deltaT
         self.velocity = self.velocity + self.acceleration * deltaT
@@ -61,8 +67,8 @@ class NewtonsCradle:
        for i in self.NUM_BALLS:
            if np.linalg.norm(self.particles_list[i]-self.particles_list[i+1]) <= self.SPACING:
                for j in range(3):
-                   m1 = 1  # Mass of Fist ball in Kg
-                   m2 = 1  # Mass of Second ball in Kg
+                   m1 = self.particles_list[i].mass  # Mass of Fist ball in Kg
+                   m2 = self.particles_list[i+1].mass  # Mass of Second ball in Kg
                    u1 = self.particles_list[i].velocity[j]  # Initial Velocity of first ball in m/s
                    u2 = self.particles_list[i+1].velocity[j]  # Initial Velocity of second ball in m/s
                    mu1 = m1 / 2  # Half mass used in Kinetic energy EQN
@@ -81,7 +87,7 @@ class NewtonsCradle:
 
             for particle in self.particles_list:
                 angle = np.arccos(np.dot(particle.position, equilibrium)/(np.linalg.norm(particle.position) * np.linalg.norm(equilibrium))) #Defines the angle that the particle makes to the equalibrium position
-                particle.acceleration = np.array([(np.linalg.norm(particle.g)/particle.mass) * np.sin(angle), (np.linalg.norm(particle.g)/particle.mass) * np.cos(angle), 0]) #Creates gravitational acceleration due to a particle's displacemet
+                particle.acceleration = np.array([np.linalg.norm(particle.g) * np.sin(angle) * np.sin(angle), np.linalg.norm(particle.g) *np.sin(angle) * np.cos(angle), 0]) #Creates gravitational acceleration due to a particle's displacemet
                 # update particle position and velocity
                 if np.linalg.norm(particle.position)>self.CHAIN_LENGTH:
                     raise Exception
@@ -94,7 +100,7 @@ class Pendulum(NewtonsCradle):
         self.BALL_RADIUS = 2.5
         self.NUM_BALLS = 1
         self.particles_list = [Particle(
-            position=np.array([0.0, -self.length, 0.0], dtype=float),
+            position=np.array([0, -self.length, 0.0], dtype=float),
             velocity=np.array([0.0, 0.0, 0.0], dtype=float),
             acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
             name='Ball',
@@ -105,6 +111,6 @@ class Pendulum(NewtonsCradle):
         self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
 
         super().__init__(self.particles_list)
-    def update(self, deltaT):
-        self.movement(deltaT)
+
+
 
