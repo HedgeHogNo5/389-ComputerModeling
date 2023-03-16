@@ -1,11 +1,11 @@
 import numpy as np
 from Classes import Pendulum,Particle
-pendulum = Pendulum(length=10, mass=1)
+pendulum = Pendulum(length=10, mass=1, radius=2.5, psi=np.pi / 4)
 
 for particle in pendulum.particles_list:
-    print(particle.position)
-    print(particle.velocity)
-    print(particle.acceleration)
+    print("position = {}".format(particle.position))
+    print("Velocity = {}".format(particle.velocity))
+    print("Acceleration = {}".format(particle.acceleration))
 
 
 pendulum.movement()
