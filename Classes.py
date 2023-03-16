@@ -57,7 +57,6 @@ class Particle:
 class NewtonsCradle:
     def __init__(self, particles_list, psi):
         self.particles_list = particles_list
-        self.BALL_RADIUS = 2.5
         self.NUM_BALLS = len(particles_list)
         self.CHAIN_LENGTH = 10
         self.SPACING = 2 * self.BALL_RADIUS
