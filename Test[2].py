@@ -1,18 +1,28 @@
 import numpy as np
-from Classes import Pendulum,Particle
-pendulum = Pendulum(length=10, mass=1)
+from Classes import NewtonsCradle,Particle
 
-for particle in pendulum.particles_list:
+Sol = Particle(
+    position=np.array([0, 0, 0], dtype = float), #As taken on the 6th of December 2021
+    velocity=np.array([0, 0, 0], dtype = float), #As taken on the 6th of December 2021
+    acceleration=np.array([0, 0, 0], dtype = float),
+    name="Sol",
+    mass= 1,
+    radius= 2.5
+)
+
+NewtonsCradle.particles_list =[]
+
+for particle in NewtonsCradle.particles_list:
     print(particle.position)
     print(particle.velocity)
     print(particle.acceleration)
 
 
-pendulum.movement()
-for particle in pendulum.particles_list:
+NewtonsCradle.movement()
+for particle in NewtonsCradle.particles_list:
     for i in range (1, 10000):
         particle.EulerCromer(0.1)
-        for particle in pendulum.particles_list:
+        for particle in NewtonsCradle.particles_list:
             print("position = {}".format(particle.position))
             print("Velocity = {}".format(particle.velocity))
             print("Acceleration = {}".format(particle.acceleration))
