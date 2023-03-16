@@ -122,7 +122,6 @@ class Pendulum(NewtonsCradle):
             radius= self.radius,
             g=np.array([0, -9.81, 0])
         )]
-        self.SPACING = np.zeros(1)
         super().__init__(self.particles_list, psi)
 
 
