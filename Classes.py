@@ -75,7 +75,6 @@ class NewtonsCradle:
             d = np.linalg.norm([self.Positioningx[0], -self.CHAIN_LENGTH,0])
             self.particles_list[0].position=np.array([d * np.sin(self.InitialAngle), d*np.cos(self.InitialAngle),0])
 
-    def collision_detection(self, DeltaT):
 
 
     def collision_detection(self):
