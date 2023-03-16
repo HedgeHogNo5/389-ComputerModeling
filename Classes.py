@@ -102,9 +102,10 @@ class NewtonsCradle:
                 angle = np.arccos(np.dot(particle.position, equilibrium)/(np.linalg.norm(particle.position) * np.linalg.norm(equilibrium))) #Defines the angle that the particle makes to the equalibrium position
                 particle.acceleration = np.array([np.linalg.norm(particle.g) * np.sin(angle) * np.sin(angle), np.linalg.norm(particle.g) *np.sin(angle) * np.cos(angle), 0]) #Creates gravitational acceleration due to a particle's displacemet
                 # update particle position and velocity
-                if np.linalg.norm(particle.position)>self.CHAIN_LENGTH:
-                    raise Exception
-
+    def FOTIerror(self):
+        for i in range (self.NUM_BALLS):
+            if np.linalg.norm(self.particles_list[i].position) > np.linalg.norm([self.Positioningx, -self.CHAIN_LENGTH, 0])
+                raise Exception ("Particle flew off to infinity")
 class Pendulum(NewtonsCradle):
 
     def __init__(self, mass, length):
