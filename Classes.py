@@ -95,7 +95,6 @@ class NewtonsCradle:
                    self.particles_list[i].velocity[j] = u1 + mr * (u2 - self.particles_list[i+1].velocity[j])
 
     def movement(self):
-
         for i in range(self.NUM_BALLS): #iterates all the balls in the particles_list
             equilibrium = np.array([self.Positioningx[i], -self.CHAIN_LENGTH, 0]) #defines an equalibrium position for all the particles
             for particle in self.particles_list:
