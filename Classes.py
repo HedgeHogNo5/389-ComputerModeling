@@ -77,8 +77,10 @@ class NewtonsCradle:
 
     def collision_detection(self, DeltaT):
 
-       for i in self.NUM_BALLS:
-           if np.linalg.norm(self.particles_list[i]-self.particles_list[i+1]) <= self.SPACING:
+
+    def collision_detection(self):
+       for i in range (self.NUM_BALLS):
+           if np.linalg.norm(self.particles_list[i].position - self.particles_list[i+1].position) <= (self.particles_list[i].radius + self.particles_list[i+1].radius):
                for j in range(3):
                    m1 = self.particles_list[i].mass  # Mass of Fist ball in Kg
                    m2 = self.particles_list[i+1].mass  # Mass of Second ball in Kg
