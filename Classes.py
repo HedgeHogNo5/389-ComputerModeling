@@ -108,10 +108,11 @@ class NewtonsCradle:
                 raise Exception ("Particle flew off to infinity")
 class Pendulum(NewtonsCradle):
 
-    def __init__(self, mass, length):
+    def __init__(self, mass, length, radius, psi):
         self.length = length
+        self.InitialAngle = psi
         self.mass = mass
-        self.BALL_RADIUS = 2.5
+        self.radius = radius
         self.NUM_BALLS = 1
         self.particles_list = [Particle(
             position=np.array([0, -self.length, 0.0], dtype=float),
@@ -119,12 +120,11 @@ class Pendulum(NewtonsCradle):
             acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
             name='Ball',
             mass=self.mass,
+            radius= self.radius,
             g=np.array([0, -9.81, 0])
         )]
-        self.SPACING = 2 * self.BALL_RADIUS
-        self.g = np.array([0, -9.81, 0])  # in metres per second^2 using a approximation
-
-        super().__init__(self.particles_list)
+        self.SPACING = np.zeros(1)
+        super().__init__(self.particles_list, psi)
 
 
 
