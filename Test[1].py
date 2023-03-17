@@ -11,9 +11,9 @@ t = np.arange(0, x, dt)
 num_steps = len(t)
 pos = np.zeros((num_steps, 3))
 
-pendulum.movement()
 for particle in pendulum.particles_list:
     for i in range(num_steps):
+        pendulum.movement()
         particle.EulerCromer(dt)
         pos[i] = particle.position
         print("position = {}".format(particle.position))
