@@ -63,7 +63,6 @@ class NewtonsCradle:
         self.InitialAngle = psi
 
         for i in range(self.NUM_BALLS):
-            self.Positioningx[0] = 0
             if i == 0:
                 continue
             self.Positioningx[i]+= self.Positioningx[i-1] + self.particles_list[i-1].radius + self.Positioningx[i]
