@@ -128,8 +128,7 @@ class Pendulum(NewtonsCradle):
             acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
             name='Ball',
             mass=self.mass,
-            radius= self.radius,
-            g=np.array([0, -9.81, 0])
+            radius= self.radius
         )]
         super().__init__(self.particles_list, psi)
 
