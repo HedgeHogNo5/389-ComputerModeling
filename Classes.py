@@ -112,7 +112,7 @@ class NewtonsCradle:
 
     def FOTIerror(self):
         for i in range (self.NUM_BALLS):
-            if np.linalg.norm(self.particles_list[i].position) > np.linalg.norm([self.Positioningx, -self.CHAIN_LENGTH, 0]):
+            if np.linalg.norm(self.particles_list[i].position) > 2 * np.linalg.norm([self.Positioningx[i], -self.CHAIN_LENGTH, 0]):
                 raise Exception ("Particle flew off to infinity")
 class Pendulum(NewtonsCradle):
 
