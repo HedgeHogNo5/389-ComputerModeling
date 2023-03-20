@@ -93,12 +93,23 @@ class NewtonsCradle:
                    self.particles_list[i].velocity[j] = u1 + mr * (u2 - self.particles_list[i+1].velocity[j])
 
     def movement(self):
-        for i in range(self.NUM_BALLS): #iterates all the balls in the particles_list
-            equilibrium = np.array([self.Positioningx[i], -self.CHAIN_LENGTH, 0]) #defines an equalibrium position for all the particles
-            for particle in self.particles_list:
-                angle = np.arccos(np.dot(particle.position, equilibrium)/(np.linalg.norm(particle.position) * np.linalg.norm(equilibrium))) #Defines the angle that the particle makes to the equalibrium position
-                particle.acceleration = np.array([np.linalg.norm(particle.g) * np.sin(angle) * np.sin(angle), np.linalg.norm(particle.g) *np.sin(angle) * np.cos(angle), 0]) #Creates gravitational acceleration due to a particle's displacemet
-                # update particle position and velocity
+        for i in range(self.NUM_BALLS):
+            equilibrium = np.array([self.Positioningx[i], -self.CHAIN_LENGTH, 0])
+            cosangle = np.dot(self.particles_list[i].position, equilibrium) / (
+                        np.linalg.norm(self.particles_list[i].position) * np.linalg.norm(equilibrium))
+            angle = np.arccos(cosangle)
+
+            if self.particles_list[i].position[0] < self.Positioningx[i]:
+                # If the particle is to the left of the equilibrium, use positive acceleration
+                self.particles_list[i].acceleration = np.array([np.linalg.norm(self.g) * np.sin(angle) * np.sin(angle),
+                                                                np.linalg.norm(self.g) * np.sin(angle) * np.cos(angle),
+                                                                0])
+            else:
+                # If the particle is to the right of the equilibrium, use negative acceleration
+                self.particles_list[i].acceleration = np.array([-np.linalg.norm(self.g) * np.sin(angle) * np.sin(angle),
+                                                                -np.linalg.norm(self.g) * np.sin(angle) * np.cos(angle),
+                                                                0])
+
     def FOTIerror(self):
         for i in range (self.NUM_BALLS):
             if np.linalg.norm(self.particles_list[i].position) > np.linalg.norm([self.Positioningx, -self.CHAIN_LENGTH, 0]):
