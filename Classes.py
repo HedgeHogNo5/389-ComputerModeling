@@ -20,7 +20,6 @@ class Particle:
             name='Ball',  # name of the object
             mass=1.0,  # Currently in Kilograms (Kg)
             radius = 1.0, #Currently in cm
-            g = np.array([0, -9.81, 0]) #in metres per second^2 using a approximation
     ):
         self.position = np.array(position, dtype=float)
         self.velocity = np.array(velocity, dtype=float)
@@ -28,12 +27,11 @@ class Particle:
         self.name = name
         self.mass = mass
         self.radius = radius
-        self.g = g
         #Defining the names and other variables of the Particle
 
     def __str__(self):
-        return "Particle: {0}, Mass: {1}, Radius{2} Position: {3}, Velocity: {4}, Acceleration: {5}, gravitational Acceleration{6}".format(
-            self.name, self.mass, self.radius,  self.position, self.velocity, self.acceleration, self.g
+        return "Particle: {0}, Mass: {1}, Radius{2} Position: {3}, Velocity: {4}, Acceleration: {5}".format(
+            self.name, self.mass, self.radius,  self.position, self.velocity, self.acceleration
         )
     def KineticEnergy(self):
        KE = 1/2*self.mass*np.linalg.norm(self.velocity)
@@ -45,12 +43,12 @@ class Particle:
     def Euler(self, deltaT):
         self.position = self.position + self.velocity * deltaT
         self.velocity = self.velocity + self.acceleration * deltaT
-        #This updates the position of any body passed through this class using using the Euler Numerical method
+        # This updates the position of any body passed through this class using the Euler Numerical method
 
     def EulerCromer(self, deltaT):
         self.velocity = self.velocity + self.acceleration * deltaT
         self.position = self.position + self.velocity * deltaT
-        # This updates the position of any body passed through this class using using the Euler-Cromer Numerical method
+        # This updates the position of any body passed through this class using the Euler-Cromer Numerical method
 
 
 
@@ -61,6 +59,7 @@ class NewtonsCradle:
         self.CHAIN_LENGTH = 10
         self.Positioningx = np.zeros(self.NUM_BALLS)
         self.InitialAngle = psi
+        self.g = [0, -9.81, 0]
 
         for i in range(self.NUM_BALLS):
             if i == 0:
