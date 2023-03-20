@@ -6,21 +6,23 @@ pendulum = Pendulum(length=10, mass=1, radius=2.5, psi=np.pi/12)
 
 # Simulate the pendulum movement
 dt = 0.1
-x=1000
-t = np.arange(-1, x, dt)
+x=10000
+t = np.arange(0, x, dt)
 num_steps = len(t)
 pos = np.zeros((num_steps, 3))
 pos_mag = np.zeros(num_steps)
 
-for particle in pendulum.particles_list:
-    for i in range(num_steps):
+for i in range(num_steps):
+    for particle in pendulum.particles_list:
         pendulum.movement()
-        particle.EulerCromer(dt)
+        pendulum.FOTIerror()
+        particle.Euler(dt)
         pos[i] = particle.position
         pos_mag[i] = np.linalg.norm(particle.position)
         print("position = {}".format(particle.position))
         print("Velocity = {}".format(particle.velocity))
         print("Acceleration = {}".format(particle.acceleration))
+        print("total position ={}". format(np.linalg.norm(particle.position)))
 
 # Plot x, y, z components, and magnitude of position
 fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, sharex=True, figsize=(8, 10))
