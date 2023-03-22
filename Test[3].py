@@ -13,6 +13,7 @@ num_steps = len(t)
 pos = np.zeros((num_steps, 3))
 pos_mag = np.zeros(num_steps)
 vel = np.zeros((num_steps, 3))
+vel_mag = np.zeros(num_steps)
 accel = np.zeros((num_steps, 3))
 accel_mag = np.zeros(num_steps)
 
