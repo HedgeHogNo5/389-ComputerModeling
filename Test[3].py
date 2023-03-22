@@ -5,8 +5,8 @@ from Classes import Pendulum, Particle
 pendulum = Pendulum(length=10, mass=1, radius=2.5, psi=np.pi/12)
 
 # Simulate the pendulum movement
-dt = 0.0001
-x=100
+dt = 0.001
+x=1000
 t = np.arange(0, x, dt)
 
 num_steps = len(t)
@@ -19,17 +19,18 @@ accel_mag = np.zeros(num_steps)
 for i in range(num_steps):
     for particle in pendulum.particles_list:
         pendulum.movement()
-        """pendulum.FOTIerror()"""
+        # pendulum.FOTIerror()  # This line is commented out
         particle.Euler(dt)
         pos[i] = particle.position
         pos_mag[i] = np.linalg.norm(particle.position)
         vel[i] = particle.velocity
+        vel_mag[i] = np.linalg.norm(particle.velocity)
         accel[i] = particle.acceleration
         accel_mag[i] = np.linalg.norm(particle.acceleration)
 
-# Plot x, y, z components, and magnitude of position
-fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2, 3, sharex=True, figsize=(12, 8))
-fig.suptitle('Position and Acceleration of First Particle in Pendulum vs Time')
+# Plot x, y, z components, and magnitude of position, velocity, and acceleration
+fig, ((ax1, ax2, ax3), (ax4, ax5, ax6), (ax7, ax8, ax9)) = plt.subplots(3, 3, sharex=True, figsize=(12, 8))
+fig.suptitle('Position, Velocity, and Acceleration of First Particle in Pendulum vs Time')
 
 ax1.plot(t, pos[:, 0], label='x')
 ax1.legend()
@@ -43,32 +44,48 @@ ax3.plot(t, pos[:, 2], label='z')
 ax3.legend()
 ax3.set_ylabel('Position (m)')
 
-ax4.plot(t, accel[:, 0], label='x')
+ax4.plot(t, vel[:, 0], label='x')
 ax4.legend()
-ax4.set_ylabel('Acceleration (m/s^2)')
+ax4.set_ylabel('Velocity (m/s)')
 
-ax5.plot(t, accel[:, 1], label='y')
+ax5.plot(t, vel[:, 1], label='y')
 ax5.legend()
-ax5.set_ylabel('Acceleration (m/s^2)')
+ax5.set_ylabel('Velocity (m/s)')
 
-ax6.plot(t, accel[:, 2], label='z')
+ax6.plot(t, vel[:, 2], label='z')
 ax6.legend()
-ax6.set_ylabel('Acceleration (m/s^2)')
+ax6.set_ylabel('Velocity (m/s)')
+
+ax7.plot(t, accel[:, 0], label='x')
+ax7.legend()
+ax7.set_ylabel('Acceleration (m/s^2)')
+
+ax8.plot(t, accel[:, 1], label='y')
+ax8.legend()
+ax8.set_ylabel('Acceleration (m/s^2)')
+
+ax9.plot(t, accel[:, 2], label='z')
+ax9.legend()
+ax9.set_ylabel('Acceleration (m/s^2)')
 
 plt.tight_layout()
 
-# Plot magnitude of position and acceleration
-fig, (ax7, ax8) = plt.subplots(2, 1, sharex=True, figsize=(8, 8))
+# Plot magnitude of position, velocity, and acceleration
+fig, (ax10, ax11, ax12) = plt.subplots(3, 1, sharex=True, figsize=(8, 12))
 
-ax7.plot(t, pos_mag, label='magnitude')
-ax7.legend()
-ax7.set_xlabel('Time (s)')
-ax7.set_ylabel('Position (m)')
+ax10.plot(t, pos_mag, label='Position')
+ax10.legend()
+ax10.set_ylabel('Position Magnitude (m)')
 
-ax8.plot(t, accel_mag, label='magnitude')
-ax8.legend()
-ax8.set_xlabel('Time (s)')
-ax8.set_ylabel('Acceleration (m/s^2)')
+ax11.plot(t, vel_mag, label='Velocity')
+ax11.legend()
+ax11.set_ylabel('Velocity Magnitude (m/s)')
+
+ax12.plot(t, accel_mag, label='Acceleration')
+ax12.legend()
+ax12.set_xlabel('Time (s)')
+ax12.set_ylabel('Acceleration Magnitude (m/s^2)')
 
 plt.tight_layout()
 plt.show()
+
