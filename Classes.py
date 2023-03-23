@@ -19,7 +19,7 @@ class Particle:
             acceleration=np.array([0.0, 0.0, 0.0], dtype=float),
             name='Ball',  # name of the object
             mass=1.0,  # Currently in Kilograms (Kg)
-            radius = 1.0, #Currently in cm
+            radius=1.0,  # Currently in cm
     ):
         self.position = np.array(position, dtype=float)
         self.velocity = np.array(velocity, dtype=float)
@@ -27,19 +27,20 @@ class Particle:
         self.name = name
         self.mass = mass
         self.radius = radius
-        #Defining the names and other variables of the Particle
+        # Defining the names and other variables of the Particle
 
     def __str__(self):
         return "Particle: {0}, Mass: {1}, Radius{2} Position: {3}, Velocity: {4}, Acceleration: {5}".format(
             self.name, self.mass, self.radius,  self.position, self.velocity, self.acceleration
         )
     def KineticEnergy(self):
-       KE = 1/2*self.mass*np.linalg.norm(self.velocity)
-       return KE
+        KE = 1 / 2 * self.mass * np.linalg.norm(self.velocity)
+        return KE
 
     def Momentum(self):
-       rho = 1/2*self.mass*np.linalg.norm(self.velocity)
-       return rho
+        rho = 1 / 2 * self.mass * np.linalg.norm(self.velocity)
+        return rho
+
     def Euler(self, deltaT):
         self.position = self.position + self.velocity * deltaT
         self.velocity = self.velocity + self.acceleration * deltaT
