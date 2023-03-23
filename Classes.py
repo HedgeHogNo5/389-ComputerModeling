@@ -31,8 +31,9 @@ class Particle:
 
     def __str__(self):
         return "Particle: {0}, Mass: {1}, Radius{2} Position: {3}, Velocity: {4}, Acceleration: {5}".format(
-            self.name, self.mass, self.radius,  self.position, self.velocity, self.acceleration
+            self.name, self.mass, self.radius, self.position, self.velocity, self.acceleration
         )
+
     def KineticEnergy(self):
         KE = 1 / 2 * self.mass * np.linalg.norm(self.velocity)
         return KE
