@@ -53,7 +53,6 @@ class Particle:
         # This updates the position of any body passed through this class using the Euler-Cromer Numerical method
 
 
-
 class NewtonsCradle:
     def __init__(self, particles_list, psi):
         self.particles_list = particles_list
@@ -66,7 +65,8 @@ class NewtonsCradle:
         for i in range(self.NUM_BALLS):
             if i == 0:
                 continue
-            self.Positioningx[i] += self.Positioningx[i-1] + self.particles_list[i-1].radius + self.particles_list[i].radius
+            self.Positioningx[i] += self.Positioningx[i - 1] + self.particles_list[i - 1].radius + self.particles_list[
+                i].radius
 
         for i in range(self.NUM_BALLS):
             self.particles_list[i].position = np.array([self.Positioningx[i], -self.CHAIN_LENGTH, 0])
