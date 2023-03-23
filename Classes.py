@@ -100,7 +100,7 @@ class NewtonsCradle:
             equilibrium = np.array([self.Positioningx[i], -self.CHAIN_LENGTH, 0])
             g = np.linalg.norm(self.g)
             cosangle = np.dot(self.particles_list[i].position, equilibrium) / (
-                        np.linalg.norm(self.particles_list[i].position) * np.linalg.norm(equilibrium))
+                    np.linalg.norm(self.particles_list[i].position) * np.linalg.norm(equilibrium))
             angle = np.arccos(cosangle)
 
             if self.particles_list[i].position[0] < self.Positioningx[i]:
