@@ -72,10 +72,9 @@ class NewtonsCradle:
             self.particles_list[i].position = np.array([self.Positioningx[i], -self.CHAIN_LENGTH, 0])
 
         if self.InitialAngle != 0:
-            d = np.linalg.norm([self.Positioningx[0], -self.CHAIN_LENGTH, 0])
-            self.particles_list[0].position = np.array([d * np.sin(self.InitialAngle), d*np.cos(self.InitialAngle), 0])
-
-
+            d = self.CHAIN_LENGTH
+            self.particles_list[0].position = np.array(
+                [d * np.sin(self.InitialAngle), -d * np.cos(self.InitialAngle), 0])
 
     def collision_detection(self):
        for i in range (self.NUM_BALLS):
