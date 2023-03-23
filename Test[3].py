@@ -5,8 +5,8 @@ from Classes import Pendulum, Particle
 pendulum = Pendulum(length=10, mass=1, radius=2.5, psi=np.pi/12)
 
 # Simulate the pendulum movement
-dt = 0.001
-x=100
+dt = 0.00001
+x = 1*(pendulum.Period())
 t = np.arange(0, x, dt)
 
 num_steps = len(t)
@@ -20,7 +20,7 @@ accel_mag = np.zeros(num_steps)
 for i in range(num_steps):
     for particle in pendulum.particles_list:
         pendulum.movement()
-        # pendulum.FOTIerror()  # This line is commented out
+        pendulum.FOTIerror()
         particle.Euler(dt)
         pos[i] = particle.position
         pos_mag[i] = np.linalg.norm(particle.position)
