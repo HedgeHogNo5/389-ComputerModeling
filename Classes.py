@@ -98,19 +98,21 @@ class NewtonsCradle:
     def movement(self):
         for i in range(self.NUM_BALLS):
             equilibrium = np.array([self.Positioningx[i], -self.CHAIN_LENGTH, 0])
+            g = np.linalg.norm(self.g)
             cosangle = np.dot(self.particles_list[i].position, equilibrium) / (
                         np.linalg.norm(self.particles_list[i].position) * np.linalg.norm(equilibrium))
             angle = np.arccos(cosangle)
 
             if self.particles_list[i].position[0] < self.Positioningx[i]:
                 # If the particle is to the left of the equilibrium, use positive acceleration
-                self.particles_list[i].acceleration = np.array([np.linalg.norm(self.g) * np.sin(angle) * np.cos(angle),
-                                                                -np.linalg.norm(self.g) * np.sin(angle) * np.sin(angle),
+                self.particles_list[i].acceleration = np.array([ g * np.sin(angle) * np.cos(angle),
+                                                                -g * np.sin(angle) * np.sin(angle),
                                                                 0])
-            else:
+
+            if self.particles_list[i].position[0] > self.Positioningx[i]:
                 # If the particle is to the right of the equilibrium, use negative acceleration
-                self.particles_list[i].acceleration = np.array([-np.linalg.norm(self.g) * np.sin(angle) * np.cos(angle),
-                                                                np.linalg.norm(self.g) * np.sin(angle) * np.sin(angle),
+                self.particles_list[i].acceleration = np.array([-g * np.sin(angle) * np.cos(angle),
+                                                               g * np.sin(angle) * np.sin(angle),
                                                                 0])
 
     def FOTIerror(self):
