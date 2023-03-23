@@ -121,6 +121,9 @@ class NewtonsCradle:
                     [self.Positioningx[i], -self.CHAIN_LENGTH, 0]):
                 raise Exception("Particle flew off to infinity")
 
+    def Period(self):
+        P= 2 * np.pi * np.sqrt(self.CHAIN_LENGTH/np.linalg.norm(self.g))
+        return P
 
 class Pendulum(NewtonsCradle):
 
