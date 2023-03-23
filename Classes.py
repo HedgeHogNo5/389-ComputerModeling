@@ -77,21 +77,23 @@ class NewtonsCradle:
                 [d * np.sin(self.InitialAngle), -d * np.cos(self.InitialAngle), 0])
 
     def collision_detection(self):
-       for i in range (self.NUM_BALLS):
-           if np.linalg.norm(self.particles_list[i].position - self.particles_list[i+1].position) <= (self.particles_list[i].radius + self.particles_list[i+1].radius):
-               for j in range(3):
-                   m1 = self.particles_list[i].mass  # Mass of Fist ball in Kg
-                   m2 = self.particles_list[i+1].mass  # Mass of Second ball in Kg
-                   u1 = self.particles_list[i].velocity[j]  # Initial Velocity of first ball in m/s
-                   u2 = self.particles_list[i+1].velocity[j]  # Initial Velocity of second ball in m/s
-                   mu1 = m1 / 2  # Half mass used in Kinetic energy EQN
-                   mu2 = m2 / 2  # Half mass used in Kinetic energy EQN
-                   mr = m2 / m1  # Ratio of the two masses
-                   a = (mu2 + mu1 * mr ** 2)
-                   b = (-2 * mr * mu1 * u1 - 2 * u2 * (mr ** 2) * mu1 * u2 * mr ** 2)
-                   c = 2 * mr * u1 * mu1 * u2 + mu1 * (mr ** 2) * (u2 ** 2) - mu2 * u2
-                   self.particles_list[i+1].velocity[j] = (-b + np.sqrt((b ** 2) - 4 * a * c)) / 2 * a  # Quadratic formula
-                   self.particles_list[i].velocity[j] = u1 + mr * (u2 - self.particles_list[i+1].velocity[j])
+        for i in range(self.NUM_BALLS):
+            if np.linalg.norm(self.particles_list[i].position - self.particles_list[i + 1].position) <= (
+                    self.particles_list[i].radius + self.particles_list[i + 1].radius):
+                for j in range(3):
+                    m1 = self.particles_list[i].mass  # Mass of Fist ball in Kg
+                    m2 = self.particles_list[i + 1].mass  # Mass of Second ball in Kg
+                    u1 = self.particles_list[i].velocity[j]  # Initial Velocity of first ball in m/s
+                    u2 = self.particles_list[i + 1].velocity[j]  # Initial Velocity of second ball in m/s
+                    mu1 = m1 / 2  # Half mass used in Kinetic energy EQN
+                    mu2 = m2 / 2  # Half mass used in Kinetic energy EQN
+                    mr = m2 / m1  # Ratio of the two masses
+                    a = (mu2 + mu1 * mr ** 2)
+                    b = (-2 * mr * mu1 * u1 - 2 * u2 * (mr ** 2) * mu1 * u2 * mr ** 2)
+                    c = 2 * mr * u1 * mu1 * u2 + mu1 * (mr ** 2) * (u2 ** 2) - mu2 * u2
+                    self.particles_list[i + 1].velocity[j] = (-b + np.sqrt(
+                        (b ** 2) - 4 * a * c)) / 2 * a  # Quadratic formula
+                    self.particles_list[i].velocity[j] = u1 + mr * (u2 - self.particles_list[i + 1].velocity[j])
 
     def movement(self):
         for i in range(self.NUM_BALLS):
