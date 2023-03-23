@@ -137,6 +137,3 @@ class Pendulum(NewtonsCradle):
             radius=self.radius
         )]
         super().__init__(self.particles_list, psi)
-
-
-
