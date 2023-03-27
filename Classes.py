@@ -54,10 +54,10 @@ class Particle:
 
 
 class NewtonsCradle:
-    def __init__(self, particles_list, psi):
+    def __init__(self, particles_list, length, psi):
         self.particles_list = particles_list
         self.NUM_BALLS = len(particles_list)
-        self.CHAIN_LENGTH = 10
+        self.CHAIN_LENGTH = length
         self.Positioningx = np.zeros(self.NUM_BALLS)
         self.InitialAngle = psi
         self.g = [0, -9.81, 0]
