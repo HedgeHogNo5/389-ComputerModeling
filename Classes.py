@@ -64,8 +64,9 @@ class NewtonsCradle:
 
         for i in range(self.NUM_BALLS):
             if i == 0:
-                continue
-            self.Positioningx[i] += self.Positioningx[i - 1] + self.particles_list[i - 1].radius + self.particles_list[
+                self.Positioningx[i]=0
+            else:
+                self.Positioningx[i] = self.Positioningx[i - 1] + self.particles_list[i - 1].radius + self.particles_list[
                 i].radius
 
         for i in range(self.NUM_BALLS):
