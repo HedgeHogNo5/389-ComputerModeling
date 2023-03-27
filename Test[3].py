@@ -18,9 +18,9 @@ accel = np.zeros((num_steps, 3))
 accel_mag = np.zeros(num_steps)
 
 for i in range(num_steps):
+    pendulum.movement()
+    pendulum.FOTIerror()
     for particle in pendulum.particles_list:
-        pendulum.movement()
-        pendulum.FOTIerror()
         particle.Euler(dt)
         pos[i] = particle.position
         pos_mag[i] = np.linalg.norm(particle.position)
