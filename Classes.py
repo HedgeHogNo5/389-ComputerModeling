@@ -128,7 +128,7 @@ class NewtonsCradle:
 
 class Pendulum(NewtonsCradle):
 
-    def __init__(self, mass, length, radius, psi):
+    def __init__(self, mass, length, radius, phi):
         self.length = length
         self.InitialAngle = psi
         self.mass = mass
@@ -142,4 +142,6 @@ class Pendulum(NewtonsCradle):
             mass=self.mass,
             radius=self.radius
         )]
-        super().__init__(self.particles_list, psi)
+        super().__init__(self.particles_list, length, psi)
+        length = self.length
+        psi =
