@@ -108,13 +108,13 @@ class NewtonsCradle:
                 # If the particle is to the left of the equilibrium, use positive acceleration
                 self.particles_list[i].acceleration = np.array([ g * np.sin(angle) * np.cos(angle),
                                                                 -g * np.sin(angle) * np.sin(angle),
-                                                                0])
+                                                                 0])
 
             if self.particles_list[i].position[0] > self.Positioningx[i]:
                 # If the particle is to the right of the equilibrium, use negative acceleration
                 self.particles_list[i].acceleration = np.array([-g * np.sin(angle) * np.cos(angle),
-                                                               g * np.sin(angle) * np.sin(angle),
-                                                                0])
+                                                                 g * np.sin(angle) * np.sin(angle),
+                                                                 0])
 
     def FOTIerror(self):
         for i in range(self.NUM_BALLS):
