@@ -130,7 +130,7 @@ class Pendulum(NewtonsCradle):
 
     def __init__(self, mass, length, radius, phi):
         self.length = length
-        self.InitialAngle = psi
+        self.InitialAngle = phi
         self.mass = mass
         self.radius = radius
         self.NUM_BALLS = 1
