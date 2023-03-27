@@ -6,7 +6,7 @@ pendulum = Pendulum(length=10, mass=1, radius=2.5, psi=np.pi/12)
 
 # Simulate the pendulum movement
 dt = 0.00001
-x = 1*(pendulum.Period())
+x = 2*(pendulum.Period())
 t = np.arange(0, x, dt)
 
 num_steps = len(t)
