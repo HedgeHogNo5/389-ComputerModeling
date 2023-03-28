@@ -35,8 +35,8 @@ for i in range(num_steps):
     newtonscradle.FOTIerror()
     for j in range(newtonscradle.NUM_BALLS):
         newtonscradle.particles_list[j].Euler(dt)
-    kinetic_energy = newtonscradle.TotKineticEnergy()
-    momentum = newtonscradle.TotMomentum()
+    kinetic_energy[i] = newtonscradle.TotKineticEnergy()
+    momentum[i] = newtonscradle.TotMomentum()
 
 # Plot kinetic energy and momentum
 fig, axs = plt.subplots(2, sharex=True, figsize=(10, 6))
