@@ -120,7 +120,7 @@ class NewtonsCradle:
 
     def FOTIerror(self): # This is a Error that will be raised if the particles shoot off to infinity. It will trigger when a particle is five times the chain length away from the hanging point
         for i in range(self.NUM_BALLS):
-            if np.linalg.norm(self.particles_list[i].position) > 2 * np.linalg.norm(
+            if np.linalg.norm(self.particles_list[i].position) > 5 * np.linalg.norm(
                     [self.Positioningx[i], -self.CHAIN_LENGTH, 0]):
                 raise Exception("Particle flew off to infinity")
 
