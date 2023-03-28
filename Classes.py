@@ -20,6 +20,7 @@ class Particle:
             name='Ball',  # name of the object
             mass=1.0,  # Currently in Kilograms (Kg)
             radius=1.0,  # Currently in cm
+            colour=(255, 255, 255)  # RGB color value (default is white)
     ):
         self.position = np.array(position, dtype=float)
         self.velocity = np.array(velocity, dtype=float)
@@ -27,11 +28,12 @@ class Particle:
         self.name = name
         self.mass = mass
         self.radius = radius
+        self.colour = colour
         # Defining the names and other variables of the Particle
 
     def __str__(self):
-        return "Particle: {0}, Mass: {1}, Radius{2} Position: {3}, Velocity: {4}, Acceleration: {5}".format(
-            self.name, self.mass, self.radius, self.position, self.velocity, self.acceleration
+        return "Particle: {0}, Mass: {1}, Radius: {2}, Position: {3}, Velocity: {4}, Acceleration: {5}, Colour: {6}".format(
+            self.name, self.mass, self.radius, self.position, self.velocity, self.acceleration, self.colour
         )
 
     def KineticEnergy(self):
