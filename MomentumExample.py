@@ -1,6 +1,4 @@
 import numpy as np
-from Classes import Particle
-
 
 def MomentumTransfer():
     sam=np.array([2.5, 0, 0])
