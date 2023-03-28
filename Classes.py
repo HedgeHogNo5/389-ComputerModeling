@@ -98,7 +98,7 @@ class NewtonsCradle:
                         (b ** 2) - 4 * a * c)) / 2 * a  # Quadratic formula
                     self.particles_list[i].velocity[j] = u1 + mr * (u2 - self.particles_list[i + 1].velocity[j])
 
-    def movement(self):
+    def movement(self): #This Deals with the sinusoidal movement of the particle
         for i in range(self.NUM_BALLS):
             equilibrium = np.array([self.Positioningx[i], -self.CHAIN_LENGTH, 0])
             g = np.linalg.norm(self.g)
