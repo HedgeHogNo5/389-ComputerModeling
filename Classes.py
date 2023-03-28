@@ -77,7 +77,7 @@ class NewtonsCradle:
         if self.InitialAngle != 0:
             d = self.CHAIN_LENGTH
             self.particles_list[0].position = np.array(
-                [d * np.sin(self.InitialAngle), -d * np.cos(self.InitialAngle), 0])
+                [-d * np.sin(self.InitialAngle), -d * np.cos(self.InitialAngle), 0])
 
     def collision_detection(self): # This will trigger a momentum transfer if the particles collide.
         for i in range(self.NUM_BALLS-1):
