@@ -80,7 +80,7 @@ class NewtonsCradle:
                 [d * np.sin(self.InitialAngle), -d * np.cos(self.InitialAngle), 0])
 
     def collision_detection(self):
-        for i in range(self.NUM_BALLS):
+        for i in range(self.NUM_BALLS-1):
             if np.linalg.norm(self.particles_list[i].position - self.particles_list[i + 1].position) <= (
                     self.particles_list[i].radius + self.particles_list[i + 1].radius):
                 for j in range(3):
