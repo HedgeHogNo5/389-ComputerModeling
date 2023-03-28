@@ -40,7 +40,7 @@ for i in range(num_steps):
 
 # Plot kinetic energy and momentum
 fig, axs = plt.subplots(2, sharex=True, figsize=(10, 6))
-axs[0].plot(t, kinetic_energy, label="Kinetic Energy")
+axs[0].plot(t[1:], kinetic_energy[1:], label="Kinetic Energy")
 axs[0].set_ylabel("Energy (J)")
 axs[0].legend()
 axs[1].plot(t, momentum, label="Momentum")
