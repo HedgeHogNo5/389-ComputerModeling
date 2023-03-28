@@ -142,8 +142,6 @@ class NewtonsCradle:
         TMom = np.sum(Mom)
         return TMom
 
-
-
 class Pendulum(NewtonsCradle):
     def __init__(self, mass, length, radius, psi):
         self.length = length
