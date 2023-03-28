@@ -79,7 +79,7 @@ class NewtonsCradle:
             self.particles_list[0].position = np.array(
                 [d * np.sin(self.InitialAngle), -d * np.cos(self.InitialAngle), 0])
 
-    def collision_detection(self):
+    def collision_detection(self): # This will trigger a momentum transfer if the particles collide.
         for i in range(self.NUM_BALLS-1):
             if np.linalg.norm(self.particles_list[i].position - self.particles_list[i + 1].position) <= (
                     self.particles_list[i].radius + self.particles_list[i + 1].radius):
@@ -118,13 +118,13 @@ class NewtonsCradle:
                                                                  g * np.sin(angle) * np.sin(angle),
                                                                  0])
 
-    def FOTIerror(self):
+    def FOTIerror(self): # This is a Error that will be raised if the particles shoot off to infinity. It will trigger when a particle is five times the chain length away from the hanging point
         for i in range(self.NUM_BALLS):
             if np.linalg.norm(self.particles_list[i].position) > 2 * np.linalg.norm(
                     [self.Positioningx[i], -self.CHAIN_LENGTH, 0]):
                 raise Exception("Particle flew off to infinity")
 
-    def Period(self):
+    def Period(self): #This defines the Period of a pendulum, it is useful to think of time-steps in terms of this period
         P= 2 * np.pi * np.sqrt(self.CHAIN_LENGTH/np.linalg.norm(self.g))
         return P
 
