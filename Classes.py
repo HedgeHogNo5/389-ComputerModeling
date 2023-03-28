@@ -79,8 +79,9 @@ class NewtonsCradle:
             self.particles_list[0].position = np.array(
                 [-d * np.sin(self.InitialAngle), -d * np.cos(self.InitialAngle), 0])
 
-    def collision_detection(self): # This will trigger a momentum transfer if the particles collide.
-        for i in range(self.NUM_BALLS-1):
+    def collision_detection(self):
+        # This will trigger a momentum transfer if the particles collide.
+        for i in range(self.NUM_BALLS - 1):
             if np.linalg.norm(self.particles_list[i].position - self.particles_list[i + 1].position) <= (
                     self.particles_list[i].radius + self.particles_list[i + 1].radius):
                 for j in range(3):
@@ -94,9 +95,26 @@ class NewtonsCradle:
                     a = (mu2 + mu1 * mr ** 2)
                     b = (-2 * mr * mu1 * u1 - 2 * u2 * (mr ** 2) * mu1 * u2 * mr ** 2)
                     c = 2 * mr * u1 * mu1 * u2 + mu1 * (mr ** 2) * (u2 ** 2) - mu2 * u2
-                    self.particles_list[i + 1].velocity[j] = (-b + np.sqrt(
-                        (b ** 2) - 4 * a * c)) / 2 * a  # Quadratic formula
-                    self.particles_list[i].velocity[j] = u1 + mr * (u2 - self.particles_list[i + 1].velocity[j])
+                    if b ** 2 - 4 * a * c < 0:
+                        # no real solution, particles already moving away from each other
+                        continue
+                    if u1 < 0 and u2 < 0:
+                        # both particles are moving in negative direction, need to flip sign of velocities
+                        self.particles_list[i].velocity[j] = -u1
+                        self.particles_list[i + 1].velocity[j] = -u2
+                    elif u1 < 0:
+                        # first particle is moving in negative direction, need to swap velocities
+                        self.particles_list[i].velocity[j] = u2
+                        self.particles_list[i + 1].velocity[j] = u1
+                    elif u2 < 0:
+                        # second particle is moving in negative direction, need to swap velocities
+                        self.particles_list[i].velocity[j] = u2
+                        self.particles_list[i + 1].velocity[j] = u1
+                    else:
+                        # both particles are moving in positive direction, use quadratic formula
+                        self.particles_list[i + 1].velocity[j] = (-b + np.sqrt(
+                            (b * b) - 4 * a * c)) / 2 * a  # Quadratic formula
+                        self.particles_list[i].velocity[j] = u1 + mr * (u2 - self.particles_list[i + 1].velocity[j])
 
     def movement(self): #This Deals with the sinusoidal movement of the particle
         for i in range(self.NUM_BALLS):
