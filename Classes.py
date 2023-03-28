@@ -128,6 +128,22 @@ class NewtonsCradle:
         P= 2 * np.pi * np.sqrt(self.CHAIN_LENGTH/np.linalg.norm(self.g))
         return P
 
+    def TotKineticEnergy(self): # Finds the total kinetic energy of the system
+        for i in range(self.NUM_BALLS):
+            KE = np.zeros(self.NUM_BALLS)
+            KE[i] = self.particles_list[i].KineticEnergy()
+        TKE = np.sum(KE)
+        return TKE
+
+    def TotMomentum(self): # Finds the total momentum of the system
+        for i in range(self.NUM_BALLS):
+            Mom = np.zeros(self.NUM_BALLS)
+            Mom[i] = self.particles_list[i].Momentum()
+        TMom = np.sum(Mom)
+        return TMom
+
+
+
 class Pendulum(NewtonsCradle):
     def __init__(self, mass, length, radius, psi):
         self.length = length
