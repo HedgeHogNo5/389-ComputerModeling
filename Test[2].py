@@ -36,6 +36,7 @@ acc_mag = np.zeros(num_steps)
 
 for i in range(num_steps):
     newtonscradle.movement()
+    newtonscradle.collision_detection()
     newtonscradle.FOTIerror()
     for j in range(newtonscradle.NUM_BALLS):
         newtonscradle.particles_list[j].Euler(dt)
