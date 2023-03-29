@@ -19,13 +19,37 @@ Particle_2 = Particle(
     mass=1,
     radius=2.5
 )
-pl = [Particle_1, Particle_2]
+Particle_3 = Particle(
+    position=np.array([0, 0, 0], dtype=float),
+    velocity=np.array([0, 0, 0], dtype=float),
+    acceleration=np.array([0, 0, 0], dtype=float),
+    name="Particle 3",
+    mass=1,
+    radius=2.5
+)
+Particle_4 = Particle(
+    position=np.array([0, 0, 0], dtype=float),
+    velocity=np.array([0, 0, 0], dtype=float),
+    acceleration=np.array([0, 0, 0], dtype=float),
+    name="Particle 4",
+    mass=1,
+    radius=2.5
+)
+Particle_5 = Particle(
+    position=np.array([0, 0, 0], dtype=float),
+    velocity=np.array([0, 0, 0], dtype=float),
+    acceleration=np.array([0, 0, 0], dtype=float),
+    name="Particle 5",
+    mass=1,
+    radius=2.5
+)
+pl = [Particle_1, Particle_2, Particle_3, Particle_4, Particle_5]
 newtonscradle = NewtonsCradle(particles_list=pl, length=10, psi=np.pi/12)
 
 num_particles = newtonscradle.NUM_BALLS
 
 # Simulate the movement of the Newton's Cradle
-dt = 0.00001
+dt = 0.001
 x = 2*(newtonscradle.Period())
 t = np.arange(0, x, dt)
 
@@ -42,10 +66,10 @@ for i in range(num_steps):
     newtonscradle.collision_detection()
     newtonscradle.FOTIerror()
     for j, particle in enumerate(newtonscradle.particles_list):
-        particle.Euler(dt)
+        particle.EulerCromer(dt)
         pos[j, i] = particle.position
-        if j != 0:  # check if it's Particle 2
-            pos[j, i][0] -= newtonscradle.Positioningx[j]  # subtract 5 from its x-component
+        if j != 0:  # check if it's not particle 1
+            pos[j, i][0] -= newtonscradle.Positioningx[j]  # subtract Postioningx from its x component
         pos_mag[j, i] = np.linalg.norm(particle.position)
         vel[j, i] = particle.velocity
         vel_mag[j, i] = np.linalg.norm(particle.velocity)
@@ -58,18 +82,28 @@ fig.suptitle('Position, Velocity, and Acceleration of Newton\'s Cradle Particles
 
 axs[0, 0].plot(t, pos[0, :, 0], label='Particle 1')
 axs[0, 0].plot(t, pos[1, :, 0], label='Particle 2')
+axs[0, 0].plot(t, pos[2, :, 0], label='Particle 3')
+axs[0, 0].plot(t, pos[3, :, 0], label='Particle 4')
+axs[0, 0].plot(t, pos[4, :, 0], label='Particle 5')
 axs[0, 0].legend()
 axs[0, 0].set_ylabel('Position (m)')
 
 axs[0, 1].plot(t, vel[0, :, 0], label='Particle 1')
 axs[0, 1].plot(t, vel[1, :, 0], label='Particle 2')
+axs[0, 1].plot(t, vel[2, :, 0], label='Particle 3')
+axs[0, 1].plot(t, vel[3, :, 0], label='Particle 4')
+axs[0, 1].plot(t, vel[4, :, 0], label='Particle 5')
 axs[0, 1].legend()
 axs[0, 1].set_ylabel('Velocity (m/s)')
 
 axs[0, 2].plot(t, accel[0, :, 0], label='Particle 1')
 axs[0, 2].plot(t, accel[1, :, 0], label='Particle 2')
+axs[0, 2].plot(t, accel[2, :, 0], label='Particle 3')
+axs[0, 2].plot(t, accel[3, :, 0], label='Particle 4')
+axs[0, 2].plot(t, accel[4, :, 0], label='Particle 5')
 axs[0, 2].legend()
 axs[0, 2].set_ylabel('Acceleration (m/s^2)')
+
 
 # Hide the third row of subplots
 axs[1, 0].axis('off')
