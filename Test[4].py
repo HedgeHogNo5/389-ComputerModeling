@@ -44,6 +44,8 @@ for i in range(num_steps):
     for j, particle in enumerate(newtonscradle.particles_list):
         particle.Euler(dt)
         pos[j, i] = particle.position
+        if j != 0:  # check if it's Particle 2
+            pos[j, i][0] -= newtonscradle.Positioningx[j]  # subtract 5 from its x-component
         pos_mag[j, i] = np.linalg.norm(particle.position)
         vel[j, i] = particle.velocity
         vel_mag[j, i] = np.linalg.norm(particle.velocity)
