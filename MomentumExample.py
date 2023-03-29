@@ -16,7 +16,6 @@ def MomentumTransfer():
         c=2*mr*u1*mu1*u2+mu1*(mr**2)*(u2**2)-mu2*u2
         hed[j]=(-b+np.sqrt((b**2)-4*a*c))/2*a #Quadratic forumla
         sam[j]=u1+mr*(u2-hed[j])
-
-    return (sam,hed)
-print (MomentumTransfer())
+    return ("particle 1 ={}".format(sam),"particle 2 ={}".format(hed))
+print(MomentumTransfer())
 
