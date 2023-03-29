@@ -54,18 +54,18 @@ for i in range(num_steps):
 fig, axs = plt.subplots(2, 3, sharex=True, figsize=(12, 8))
 fig.suptitle('Position, Velocity, and Acceleration of Newton\'s Cradle Particles vs Time')
 
-axs[0, 0].plot(t, pos[0, :, 0], label='x')
-axs[0, 0].plot(t, pos[1, :, 0], label='x')
+axs[0, 0].plot(t, pos[0, :, 0], label='Particle 1')
+axs[0, 0].plot(t, pos[1, :, 0], label='Particle 2')
 axs[0, 0].legend()
 axs[0, 0].set_ylabel('Position (m)')
 
-axs[0, 1].plot(t, vel[0, :, 0], label='x')
-axs[0, 1].plot(t, vel[1, :, 0], label='x')
+axs[0, 1].plot(t, vel[0, :, 0], label='Particle 1')
+axs[0, 1].plot(t, vel[1, :, 0], label='Particle 2')
 axs[0, 1].legend()
 axs[0, 1].set_ylabel('Velocity (m/s)')
 
-axs[0, 2].plot(t, accel[0, :, 0], label='x')
-axs[0, 2].plot(t, accel[1, :, 0], label='x')
+axs[0, 2].plot(t, accel[0, :, 0], label='Particle 1')
+axs[0, 2].plot(t, accel[1, :, 0], label='Particle 2')
 axs[0, 2].legend()
 axs[0, 2].set_ylabel('Acceleration (m/s^2)')
 
